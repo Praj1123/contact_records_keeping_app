@@ -70,4 +70,15 @@ public class UserRepository {
         }
     }
 
+    public int deleteUser(String id) {
+        try {
+            String sql = "DELETE FROM users WHERE id = ?";
+            int result = jdbcTemplate.update(sql, id);
+            return result;
+        } catch (Exception e) {
+            System.out.println("Error occured " + e);
+            return -1;
+        }
+    }
+
 }

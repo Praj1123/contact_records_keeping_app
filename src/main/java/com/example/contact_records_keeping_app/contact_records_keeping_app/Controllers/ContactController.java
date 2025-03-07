@@ -72,10 +72,9 @@ public class ContactController {
         }
     }
 
-    @DeleteMapping("/deleteContact")
-    public ResponseEntity<String> deleteRecord(@RequestBody Map<String, String> request) {
+    @DeleteMapping("/deleteContact{id}")
+    public ResponseEntity<String> deleteRecord(@PathVariable String id) {
         try {
-            String id = request.get("id");
             int result = contactService.deleteContact(id);
             if (result > 0) {
                 return ResponseEntity.status(HttpStatus.OK).build();

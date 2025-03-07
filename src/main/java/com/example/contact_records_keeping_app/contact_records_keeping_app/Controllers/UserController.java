@@ -63,4 +63,22 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
+        try {
+            System.out.println("input: " + id);
+            int result = userService.deleteUser(id);
+            if (result > 0) {
+                return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+            } else if (result == 0) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
